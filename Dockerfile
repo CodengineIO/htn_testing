@@ -1,6 +1,5 @@
 ## CARDANO NODE BUILDER CONTAINER
-# The ubuntu:latest tag points to the "latest LTS", since that's the version recommended for general use.
-FROM ubuntu:latest AS builder
+FROM ubuntu:20.04 AS builder
 
 # Change the Cardano Node, Cabal, and GHC versions here
 ENV CABAL_VERSION="3.2"
@@ -35,8 +34,7 @@ RUN cp -f \
     /usr/local/bin/
 
 ## CARDANO NODE CONTAINER
-# The ubuntu:latest tag points to the "latest LTS", since that's the version recommended for general use.
-FROM ubuntu:latest AS cardano-node
+FROM ubuntu:20.04 AS cardano-node
 
 LABEL maintainer="Andrea Callea <gacallea@mailfence.com>" version="1.0"
 
