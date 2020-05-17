@@ -20,8 +20,9 @@ WORKDIR /usr/local/src/
 RUN git clone --recurse-submodules https://github.com/input-output-hk/cardano-node
 # Fetch and checkout (tag to be decided or master)
 WORKDIR /usr/local/src/cardano-node
+# Unfortunately the pioneers' docs are a bit outdated at the moment (the latest pioneer's tag should do it)
 RUN git fetch --tags
-RUN git checkout tags/pioneer
+RUN git checkout tags/pioneer-2
 
 # Build/Install
 # This doesn't work yet
