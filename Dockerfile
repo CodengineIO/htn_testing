@@ -16,13 +16,13 @@ RUN apt-get update -y && \
     # Install build dependencies
     apt-get install -y \
     build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ git cabal-install-${CABAL_VERSION} ghc-${GHC_VERSION} && \
-    # Set PATH and refresh Hackage
+    # Refresh Hackage
     cabal update
 
 # Clone cardano node repo
 WORKDIR /usr/local/src/
 RUN git clone --recurse-submodules https://github.com/input-output-hk/cardano-node
-# Fetch and checkout (tag to be decided or master)
+# Fetch and checkout
 WORKDIR /usr/local/src/cardano-node
 RUN git fetch --tags && \
     # the latest pioneer's tag should do it
@@ -74,16 +74,17 @@ ENV HOME=/srv/cardano/cardano-node
 # Copy some customized config files
 COPY etc/tmux.conf $HOME/.tmux.conf
 
-# Create the needed directory tree to host the cardano-node configurations
+# Create the needed directories to run the cardano-node
 RUN bash -c 'mkdir $HOME/{config,db,logs,socket}/'
 
-# Some ENV needed to be set for cli commands to work
+# Some ENV needed to be set for some cardano-cli commands to work
 ENV CARDANO_NODE_DB_PATH=$HOME/db/ \
     CARDANO_NODE_SOCKET_PATH=$HOME/socket/ \
     CARDANO_NODE_SOCKET=cardano-node.socket
 
 # This one copies the common configs for core and relay
 COPY --chown=cnode:cnode common/config/* $HOME/config/
+
 # Only the topology differs in each node
 COPY --chown=cnode:cnode core/config/topology.json $HOME/config/
 
