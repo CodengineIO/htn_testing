@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# update the URL here if needed in the future
+FF_FETCH_URL="https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html"
+
+## DON'T EDIT PAST THIS POINT ##
 # let's make sure cURL is installed
 if ! command -v curl >/dev/null; then
     echo "cURL not found. please install curl!"
@@ -17,8 +21,7 @@ tmpFile="ff.html"
 touch "$tmpFile"
 
 # get the latest build info from hydra.iohk.io
-lynx -dump -listonly https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html >"$tmpFile"
-
+lynx -dump -listonly "$FF_FETCH_URL" >"$tmpFile"
 # latest build id
 FF_BUILD_ID=$(awk '/ff/ {print $2}' "$tmpFile" | sed 's/[a-zA-Z\:\/\.\-]//g' | sort -u)
 # ff-config.json
