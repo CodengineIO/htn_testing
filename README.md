@@ -4,7 +4,7 @@ Cardano Haskell Testnet testing with Docker, using the latest Ubuntu LTS (20.04 
 
 This setup was inspired by Mark Stopka's [Cardano Node Docker Images](https://github.com/2nd-Layer/docker-hub-cardano-images/) with the addition of ```docker-compose```.
 
-## What is it? ##
+## What is it ##
 
 This Docker setup provides two containers: a ```core node``` and a ```relay node```. It is based on the Pioneer's [node setup guides](https://github.com/input-output-hk/cardano-tutorials/tree/master/node-setup) and will facilitate you to follow the Pioneer's [exercises](https://github.com/input-output-hk/cardano-tutorials/tree/master/pioneers-testnet). Consequentially, it will always track the latest ```pioneer-*``` tag on [the cardano-node repo](https://github.com/input-output-hk/cardano-node/).
 
@@ -16,6 +16,12 @@ This Docker setup provides two containers: a ```core node``` and a ```relay node
 - Docker Compose is mostly used as a helper when you want to start multiple Docker containers and doesn't want to start each one separately using docker run ....
 - Docker Compose is used instead of all optional parameters when building and running a single docker container.
 
+## Configurations ##
+
+These used to be secreted, but apparently sharing is allowed now. So, you can find the "Friends and Family" (aka Pioneers) configurations here: [https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html)
+
+Now you can automate fetching the latest "Friends and Family" (aka Pioneers) configurations files with [this script](scripts/get_ff_files.sh).
+
 ## Usage ##
 
 - Place your ```genesis.json``` in ```common/config/genesis.json```
@@ -25,12 +31,6 @@ This Docker setup provides two containers: a ```core node``` and a ```relay node
 - Run ```docker-compose -f docker-compose.yaml up --build -d```
 
 **NOTE:** If the build fails because of the host operating system killing the process for using too many resources, just re-run it until successful. It will eventually work. It helps if ```docker-compose build``` is the only process running  (the 'builder' is a resource hog).
-
-## Configuration Files ##
-
-These used to be secreted, but apparently sharing is allowed now. So, you can find the "Friends and Family" (aka Pioneers) configurations here: [https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html)
-
-Now you can automate fetching the latest "Friends and Family" (aka Pioneers) configurations files with [this script](scripts/get_ff_files.sh).
 
 ## Updates ##
 
