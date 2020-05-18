@@ -24,7 +24,11 @@ This Docker setup provides two containers: a ```core node``` and a ```relay node
 - Place your **relay node** ```topology.json``` files in ```relay/config/topology.json```
 - Run ```docker-compose -f docker-compose.yaml up --build -d```
 
-**NOTE:** If the build fails because of the host operating system killing the process for using too many resources, just re-run it until successful. It will eventually work. (the builder stage is a resource hog). It helps if ```docker-compose build``` is the only process running.
+**NOTE:** If the build fails because of the host operating system killing the process for using too many resources, just re-run it until successful. It will eventually work. It helps if ```docker-compose build``` is the only process running  (the 'builder' is a resource hog).
+
+## Configuration Files ##
+
+These used to be secreted, but apparently sharing is allowed now. So, you can find the "Friends and Family" (aka Pioneers) configurations here: [https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html)
 
 ## Updates ##
 
