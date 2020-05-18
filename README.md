@@ -30,6 +30,8 @@ This Docker setup provides two containers: a ```core node``` and a ```relay node
 
 These used to be secreted, but apparently sharing is allowed now. So, you can find the "Friends and Family" (aka Pioneers) configurations here: [https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html)
 
+Now you can automate fetching the latest "Friends and Family" (aka Pioneers) configurations files with [this script](scripts/get_ff_files.sh).
+
 ## Updates ##
 
 I will improve this content over time, as I continue testing and understanding the HTN. Possibly with a guide and instructions to make it so that it will be deployable to Digital Ocean (or any cloud provider). Possibly with [Kubernetes](https://www.youtube.com/playlist?list=PLOspHqNVtKABAVX4azqPIu6UfsPzSu2YN), and many other goodies.
