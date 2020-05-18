@@ -9,7 +9,7 @@ fi
 # let's make sure lynx is installed
 if ! command -v lynx >/dev/null; then
     echo "lynx not found. please install lynx!"
-    exit 1
+    exit 2
 fi
 
 # create a temporary file for the html dump
@@ -28,17 +28,24 @@ FF_GENE_URL=$(awk '/ff-genesis/ {print $2}' "$tmpFile")
 # ff-topology.json
 FF_TOPO_URL=$(awk '/ff-topology/ {print $2}' "$tmpFile")
 
+# we don't need the temporary file anymore
+rm -f "$tmpFile"
+
 # create latest build directory
 if [[ ! -d "${FF_BUILD_ID}" ]]; then
     mkdir "${FF_BUILD_ID}"
 fi
 
-# download the files into the build directory
-curl -sLJ "${FF_CONF_URL}" -o "${FF_BUILD_ID}"/ff-config.json
-curl -sLJ "${FF_GENE_URL}" -o "${FF_BUILD_ID}"/ff-genesis.json
-curl -sLJ "${FF_TOPO_URL}" -o "${FF_BUILD_ID}"/ff-topology.json
-
-# we protecc, we clean up
-rm -f "$tmpFile"
+# let's check if the files are already available and exit
+if [[ -f "${FF_BUILD_ID}"/ff-config.json ]] && [[ -f "${FF_BUILD_ID}"/ff-genesis.json ]] && [[ -f "${FF_BUILD_ID}"/ff-topology.json ]]; then
+    echo "You already have the latest configurations. Nothing to do here"
+    exit 3
+# otherwise go get'em
+else
+    # download the files into the build directory
+    curl -sLJ "${FF_CONF_URL}" -o "${FF_BUILD_ID}"/ff-config.json
+    curl -sLJ "${FF_GENE_URL}" -o "${FF_BUILD_ID}"/ff-genesis.json
+    curl -sLJ "${FF_TOPO_URL}" -o "${FF_BUILD_ID}"/ff-topology.json
+fi
 
 exit 0
