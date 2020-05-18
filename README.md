@@ -6,7 +6,7 @@ This setup was inspired by Mark Stopka's [Cardano Node Docker Images](https://gi
 
 ## What is it ##
 
-This Docker setup provides two containers: a ```core node``` and a ```relay node```. It is based on the Pioneer's [node setup guides](https://github.com/input-output-hk/cardano-tutorials/tree/master/node-setup) and will facilitate you to follow the Pioneer's [exercises](https://github.com/input-output-hk/cardano-tutorials/tree/master/pioneers-testnet). Consequentially, it will always track the latest ```pioneer-*``` tag on [the cardano-node repo](https://github.com/input-output-hk/cardano-node/).
+This Docker setup provides two containers: a ```core node``` and a ```relay node```. It is based on the Pioneer's [node setup guides](https://github.com/input-output-hk/cardano-tutorials/tree/master/node-setup) and will facilitate you to follow the Pioneer's [exercises](https://github.com/input-output-hk/cardano-tutorials/tree/master/pioneers-testnet). Consequentially, it will track the latest ```pioneer-*``` tag on [the cardano-node repo](https://github.com/input-output-hk/cardano-node/).
 
 ## Docker Compose ##
 
@@ -20,23 +20,23 @@ This Docker setup provides two containers: a ```core node``` and a ```relay node
 
 These used to be secreted, but apparently sharing is allowed now. So, you can find the "Friends and Family" (aka Pioneers) configurations here: [https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html](https://hydra.iohk.io/job/Cardano/iohk-nix/cardano-deployment/latest-finished/download/1/index.html)
 
-Now you can automate fetching the latest "Friends and Family" (aka Pioneers) configurations files with [this script](scripts/get_ff_files.sh).
+The configurations are now provided with this repo as well, and you can automate fetching the latest "Friends and Family" (aka Pioneers) configurations files with [this script](scripts/get_ff_files.sh).
 
 ## Usage ##
 
-- Place your ```genesis.json``` in ```common/config/genesis.json```
-- Place your ```config.json``` in ```common/config/config.json```
-- Place your **core node** ```topology.json``` files in ```core/config/topology.json```
-- Place your **relay node** ```topology.json``` files in ```relay/config/topology.json```
+- Place your ```ff-genesis.json``` in ```common/config/ff-genesis.json```
+- Place your ```ff-config.json``` in ```common/config/ff-config.json```
+- Place your **core node** ```ff-topology.json``` files in ```core/config/ff-topology.json```
+- Place your **relay node** ```ff-topology.json``` files in ```relay/config/ff-topology.json```
 - Run ```docker-compose -f docker-compose.yaml up --build -d```
 
-**NOTE:** If the build fails because of the host operating system killing the process for using too many resources, just re-run it until successful. It will eventually work. It helps if ```docker-compose build``` is the only process running  (the 'builder' is a resource hog).
+If the build fails because of the host operating system killing the process for using too many resources, just re-run it until successful. It will eventually work. It helps if ```docker-compose build``` is the only process running  (the 'builder' is a resource hog).
+
+Make sure to match your nodes ports in both ```docker-compose.yaml``` and in both ```ff-topology.json``` files.
 
 ## Updates ##
 
-I will improve this content over time, as I continue testing and understanding the HTN. Possibly with a guide and instructions to make it so that it will be deployable to Digital Ocean (or any cloud provider). Possibly with [Kubernetes](https://www.youtube.com/playlist?list=PLOspHqNVtKABAVX4azqPIu6UfsPzSu2YN), and many other goodies.
-
-Follow [insaladaPool](https://twitter.com/insaladaPool) on Twitter for updates.
+I will improve this content over time, as I continue testing and understanding the HTN. Possibly with a guide and instructions to make it so that it will be deployable to Digital Ocean (or any cloud provider). Possibly with [Kubernetes](https://www.youtube.com/playlist?list=PLOspHqNVtKABAVX4azqPIu6UfsPzSu2YN), and many other goodies. Follow [insaladaPool](https://twitter.com/insaladaPool) on Twitter for updates.
 
 ## About Me ###
 

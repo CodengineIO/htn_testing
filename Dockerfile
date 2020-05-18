@@ -86,7 +86,7 @@ ENV CARDANO_NODE_DB_PATH=$HOME/db/ \
 COPY --chown=cnode:cnode common/config/* $HOME/config/
 
 # Only the topology differs in each node
-COPY --chown=cnode:cnode core/config/topology.json $HOME/config/
+COPY --chown=cnode:cnode core/config/* $HOME/config/
 
 WORKDIR /srv/cardano/cardano-node/
 
@@ -98,7 +98,7 @@ FROM cardano-node AS cardano-relay
 ENV CARDANO_NODE_SOCKET=cardano-relay.socket
 
 # Only the topology differs in each node
-COPY --chown=cnode:cnode relay/config/topology.json $HOME/config/
+COPY --chown=cnode:cnode relay/config/* $HOME/config/
 
 WORKDIR /srv/cardano/cardano-node/
 

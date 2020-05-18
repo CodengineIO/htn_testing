@@ -6,16 +6,18 @@ services:
       context: .
       target: cardano-node
     environment:
-      # Set the time zone here. relay will inherit this.
-      # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones (look for TZ Database name for your timezone)
+      # Set the time zone here. relay will inherit this. https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
       # - TZ=UTC
       - TZ=Europe/Rome
-      - CARDANO_NODE_PORT=8080
+      # change this to match your relay node port and topology. note: use "core" as address in the topology
+      - CARDANO_NODE_PORT=3000
     networks:
       - back-tier
     expose:
-      - "8080"
-      - "12798"
+      # change this to match your relay node port and topology. note: use "core" as address in the topology
+      - "3000"
+      # change this to match "hasPrometheus" in the config.json file and vice versa. also set the prometheus address to "0.0.0.0"
+      - "9101"
 
   relay:
     depends_on:
@@ -24,13 +26,16 @@ services:
       context: .
       target: cardano-relay
     environment:
-      - CARDANO_NODE_PORT=8081
+      # change this to match your relay node port and topology. note: use "relay" as address in the topology
+      - CARDANO_NODE_PORT=3001
     networks:
       - back-tier
       - front-tier
     expose:
-      - "8081"
-      - "12798"
+      # change this to match your relay node port and topology. note: use "relay" as address in the topology
+      - "3001"
+      # change this to match "hasPrometheus" in the config.json file and vice versa. also set the prometheus address to "0.0.0.0"
+      - "9101"
     ports:
       - "3001:3001"
 
