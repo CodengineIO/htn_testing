@@ -72,7 +72,7 @@ USER cnode
 ENV HOME=/srv/cardano/cardano-node
 
 # Copy some customized config files
-COPY etc/tmux.conf $HOME/.tmux.conf
+COPY --chown=cnode:cnode etc/tmux.conf $HOME/.tmux.conf
 
 # Create the needed directories to run the cardano-node
 RUN bash -c 'mkdir $HOME/{config,db,logs,socket}/'
